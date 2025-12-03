@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Editor | 5+ Years Experience | Film & News Industry</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles - Enhanced */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff4e50;
+            --accent2: #f9d423;
+            --dark: #0f0f23;
+            --dark2: #1a1a2e;
+            --light: #f0f8ff;
+            --shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient2: linear-gradient(45deg, var(--accent), var(--accent2));
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 100%);
+            color: var(--light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(106, 17, 203, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(37, 117, 252, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255, 78, 80, 0.03) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            background: linear-gradient(45deg, rgba(106, 17, 203, 0.1), rgba(37, 117, 252, 0.1));
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(1) { width: 300px; height: 300px; top: 10%; left: 5%; animation-delay: 0s; }
+        .shape:nth-child(2) { width: 200px; height: 200px; top: 60%; right: 10%; animation-delay: -5s; }
+        .shape:nth-child(3) { width: 150px; height: 150px; bottom: 20%; left: 20%; animation-delay: -10s; }
+        .shape:nth-child(4) { width: 250px; height: 250px; top: 20%; right: 20%; animation-delay: -15s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, 20px) rotate(90deg); }
+            50% { transform: translate(0, 40px) rotate(180deg); }
+            75% { transform: translate(-20px, 20px) rotate(270deg); }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation - Enhanced */
+        header {
+            background: rgba(15, 15, 35, 0.92);
+            backdrop-filter: blur(15px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            animation: slideDown 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes slideDown {
+            from { 
+                transform: translateY(-100%); 
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0); 
+                opacity: 1;
+            }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(106, 17, 203, 0.4);
+            letter-spacing: 1px;
+            position: relative;
+            padding-left: 8px;
+        }
+
+        .logo::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.8rem;
+            color: var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 8px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: var(--gradient);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+        }
+
+        .mobile-menu-btn:hover {
+            transform: rotate(90deg);
+            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.4);
+        }
+
+        /* Hero Section - Enhanced with Image Slider */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.4) contrast(1.1);
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide1 { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80');}
+        .slide2 { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1761839256951-10c4468c3621?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80'); }
+        .slide3 { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); }
+        .slide4 { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); }
+        .slide5 { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1528109966604-5a6a4a964e8d?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?ixlib=rb-4.0.3&auto=format&fit=crop&w=2053&q=80'); }
+        .slide6 { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1553905346-c2d74360eccf?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?ixlib=rb-4.0.3&auto=format&fit=crop&w=2067&q=80'); }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1s ease 0.3s both;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            line-height: 1.1;
+            text-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .gradient-text {
+            background: var(--gradient2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .gradient-text::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient2);
+            border-radius: 3px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 35px;
+            opacity: 0.9;
+            max-width: 700px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(249, 212, 35, 0.2) 0%, rgba(249, 212, 35, 0) 100%);
+            padding: 0 10px;
+            border-radius: 5px;
+            color: var(--accent2);
+            font-weight: 600;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 45px;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(106, 17, 203, 0.4);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            margin-top: 20px;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient2);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 78, 80, 0.4);
+            letter-spacing: 1px;
+        }
+
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 40px 0;
+            animation: fadeIn 1s ease 0.6s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .trust-badge {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 25px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: var(--transition);
+            cursor: default;
+        }
+
+        .trust-badge:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(106, 17, 203, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .badge-icon {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        /* Client Testimonials */
+        .testimonials {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '"';
+            position: absolute;
+            top: -30px;
+            left: 30px;
+            font-size: 15rem;
+            color: rgba(255, 255, 255, 0.02);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .testimonial-slider {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 10px 0;
+            scrollbar-width: none;
+        }
+
+        .testimonial-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .testimonial-card {
+            min-width: 350px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 40px;
+            border: 5px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(106, 17, 203, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .client-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Free Offer Section - Enhanced */
+        .offer-section {
+            background: linear-gradient(135deg, rgba(106, 17, 203, 0.15) 0%, rgba(37, 117, 252, 0.15) 100%);
+            border-radius: 30px;
+            padding: 80px 60px;
+            margin: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow);
+        }
+
+        .offer-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: moveBackground 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(30px, 30px) rotate(360deg); }
+        }
+
+        .offer-title {
+            font-size: 3.2rem;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .offer-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 5px;
+            background: var(--gradient2);
+            border-radius: 5px;
+        }
+
+        .offer-timer-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 600px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-timer {
+            font-size: 3.5rem;
+            font-weight: 800;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 5px;
+            margin: 20px 0;
+            text-shadow: 0 0 20px rgba(0, 176, 155, 0.5);
+            position: relative;
+            display: inline-block;
+        }
+
+        .timer-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 176, 155, 0.3) 0%, transparent 70%);
+            filter: blur(40px);
+            z-index: -1;
+            animation: pulseGlow 3s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.8); }
+            100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        /* Services Section - Enhanced */
+        .section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 70px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 8px;
+            background: var(--gradient);
+            border-radius: 4px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 50px 40px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--gradient);
+            z-index: 2;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .service-card:hover::after {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        /* Contact Section - Enhanced */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(106, 17, 203, 0.3);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            background: var(--gradient2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: rotateY(360deg);
+        }
+
+        .contact-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 35px;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient2);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .contact-link:hover::before {
+            left: 0;
+        }
+
+        .contact-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 78, 80, 0.3);
+        }
+
+        /* Footer - Enhanced */
+        footer {
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5));
+            padding: 80px 0 30px;
+            margin-top: 120px;
+            text-align: center;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            transform: scale(0);
+            transition: var(--transition);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .social-icon:hover::before {
+            transform: scale(1);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-8px) rotate(10deg);
+            border-color: transparent;
+            box-shadow: 0 15px 30px rgba(106, 17, 203, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero h1 { font-size: 3.5rem; }
+            .offer-title { font-size: 2.8rem; }
+            .section-title { font-size: 2.5rem; }
+        }
+
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 90px;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 15, 35, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 40px;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+                gap: 30px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .hero h1 { font-size: 3rem; }
+            .services-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .offer-title { font-size: 2.2rem; }
+            .offer-timer { font-size: 2.8rem; letter-spacing: 3px; }
+            .section-title { font-size: 2.2rem; }
+            .section { padding: 80px 0; }
+            .testimonial-card { min-width: 300px; }
+            .trust-badges { justify-content: center; }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 { font-size: 2rem; }
+            .logo { font-size: 1.8rem; }
+            .cta-button { padding: 15px 30px; font-size: 1.1rem; }
+            .offer-section { padding: 50px 20px; }
+            .offer-timer { font-size: 2.2rem; }
+            .service-card { padding: 40px 25px; }
+            .contact-card { padding: 30px 20px; }
+            .social-icon { width: 50px; height: 50px; font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Shapes -->
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">BLACK EDITOR</div>
+                <div class="nav-links" id="navLinks">
+                    <a href="#home">Home</a>
+                    <a href="#services">Services</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#offer">Free Offer</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section with Image Slider -->
+    <section class="hero" id="home">
+        <div class="hero-slider" id="heroSlider">
+            <div class="slide slide1 active"></div>
+            <div class="slide slide2"></div>
+            <div class="slide slide3"></div>
+            <div class="slide slide4"></div>
+            <div class="slide slide5"></div>
+            <div class="slide slide6"></div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <h1>Professional <span class="gradient-text">Video & Photo Editor</span></h1>
+                <p>With <span class="highlight">5+ Years Experience</span> working with major News Channels & Bollywood Film Industry. Award-winning editor specializing in cinematic video editing, advanced photo manipulation, creative graphics, and high-CTR thumbnails.</p>
+                
+                <!-- Trust Badges -->
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <i class="fas fa-shield-alt badge-icon"></i>
+                        <div>
+                            <strong>100% Client Satisfaction</strong>
+                            <div class="small">500+ Projects Completed</div>
+                        </div>
+                    </div>
+                    <div class="trust-badge">
+                        <i class="fas fa-clock badge-icon"></i>
+                        <div>
+                            <strong>On-Time Delivery</strong>
+                            <div class="small">Never Missed Deadline</div>
+                        </div>
+                    </div>
+                    <div class="trust-badge">
+                        <i class="fas fa-star badge-icon"></i>
+                        <div>
+                            <strong>5-Star Rated</strong>
+                            <div class="small">By 200+ Clients</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="#contact" class="cta-button">
+                    <i class="fas fa-gift"></i> Claim Free Project
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <div class="container">
+            <h2 class="section-title">Professional Editing Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3>Cinematic Video Editing</h3>
+                    <p>Hollywood-style editing with color grading, VFX, transitions. Specialized in news, films, documentaries.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-camera-retro"></i>
+                    </div>
+                    <h3>Advanced Photo Editing</h3>
+                    <p>Professional retouching, manipulation, restoration. Perfect for portraits, products, real estate.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Creative Graphic Design</h3>
+                    <p>Logos, banners, social media graphics, posters with modern design trends and psychology.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-thumbtack"></i>
+                    </div>
+                    <h3>YouTube Thumbnails</h3>
+                    <p>High-CTR thumbnails that boost views. Custom graphics, text effects, psychological triggers.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>Motion Graphics</h3>
+                    <p>Animated intros, explainer videos, kinetic typography. Engage viewers with dynamic visuals.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-headphones-alt"></i>
+                    </div>
+                    <h3>Audio Production</h3>
+                    <p>Professional audio cleanup, mixing, voice-over editing, sound design for videos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Testimonials -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Client Testimonials</h2>
+            <div class="testimonials">
+                <div class="testimonial-slider">
+                    <div class="testimonial-card">
+                        <div class="client-info">
+                            <div class="client-avatar">AB</div>
+                            <div>
+                                <h4>Anjali Bhatia</h4>
+                                <small>News Channel Producer</small>
+                            </div>
+                        </div>
+                        <p>"Worked on our prime-time news segments for 2 years. Exceptional attention to detail and always meets tight deadlines. Highly recommended!"</p>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="client-info">
+                            <div class="client-avatar">RS</div>
+                            <div>
+                                <h4>Raj Sharma</h4>
+                                <small>Film Director</small>
+                            </div>
+                        </div>
+                        <p>"Edited 3 feature films. Brings creative vision and technical perfection. Transformed raw footage into cinematic masterpieces."</p>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="client-info">
+                            <div class="client-avatar">PM</div>
+                            <div>
+                                <h4>Priya Mehta</h4>
+                                <small>YouTube Creator (5M subs)</small>
+                            </div>
+                        </div>
+                        <p>"My channel grew 200% after using his thumbnail designs. CTR increased from 3% to 12%. Game changer!"</p>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="client-info">
+                            <div class="client-avatar">VM</div>
+                            <div>
+                                <h4>Vikram Malhotra</h4>
+                                <small>Advertising Agency CEO</small>
+                            </div>
+                        </div>
+                        <p>"Handles all our client projects. Professional, creative, and delivers beyond expectations every time."</p>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Free Offer Section -->
+    <section class="section" id="offer">
+        <div class="container">
+            <div class="offer-section">
+                <h2 class="offer-title">🎁 LIMITED TIME OFFER 🎁</h2>
+                <p class="offer-desc" style="font-size: 1.3rem; max-width: 900px; margin: 0 auto 30px;">
+                    Get your <span class="highlight" style="font-size: 1.4rem;">FIRST editing project COMPLETELY FREE!</span> Perfect opportunity to experience premium editing quality before committing. Choose any service - Video, Photo, Graphics, or Thumbnail!
+                </p>
+                
+                <div class="offer-timer-container">
+                    <div class="timer-glow"></div>
+                    <div style="font-size: 1.2rem; margin-bottom: 10px;">OFFER EXPIRES IN:</div>
+                    <div class="offer-timer" id="countdown">24:00:00</div>
+                    <div style="font-size: 1.1rem; margin-top: 10px;">Fast Contact Me Now</div>
+                </div>
+                
+                <div style="max-width: 800px; margin: 30px auto; padding: 25px; background: rgba(0,0,0,0.2); border-radius: 15px;">
+                    <h3 style="margin-bottom: 15px; color: var(--accent2);">✅ What's Included in FREE Offer:</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; text-align: left;">
+                        <div><i class="fas fa-check-circle" style="color: #00b09b;"></i> One complete project</div>
+                        <div><i class="fas fa-check-circle" style="color: #00b09b;"></i> Professional quality</div>
+                        <div><i class="fas fa-check-circle" style="color: #00b09b;"></i> 2 revisions included</div>
+                        <div><i class="fas fa-check-circle" style="color: #00b09b;"></i> 12-24 hour delivery</div>
+                        <div><i class="fas fa-check-circle" style="color: #00b09b;"></i> Source files provided</div>
+                    </div>
+                </div>
+                
+                <a href="#contact" class="cta-button">
+                    <i class="fas fa-bolt"></i> CLAIM FREE PROJECT NOW
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Me Now</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 50px; font-size: 1.2rem;">
+                Ready to transform your content? Contact me through any platform below. I typically respond within <span class="highlight">15-30 minutes</span> during business hours.
+            </p>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <p>Fastest response • Project discussions • File sharing</p>
+                    <a href="https://wa.me/918653254692?text=Hi!%20I%20want%20to%20claim%20the%20FREE%20editing%20offer" class="contact-link" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Message Now
+                    </a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>Detailed briefs • Formal communication • Contracts</p>
+                    <a href="mailto:zub.editor@gmail.com?subject=Free%20Project%20Claim&body=Hi,%20I%20want%20to%20claim%20your%20free%20editing%20offer." class="contact-link">
+                        <i class="fas fa-paper-plane"></i> Send Email
+                    </a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-telegram-plane"></i>
+                    </div>
+                    <h3>Telegram</h3>
+                    <p>Quick chat • Large file support • Instant updates</p>
+                    <a href="https://t.me/Mr_BLACK_ix" class="contact-link" target="_blank">
+                        <i class="fab fa-telegram"></i> Join Telegram
+                    </a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-facebook-messenger"></i>
+                    </div>
+                    <h3>Facebook</h3>
+                    <p>Portfolio • Reviews • Live chat • Community</p>
+                    <a href="https://facebook.com" class="contact-link" target="_blank">
+                        <i class="fab fa-facebook"></i> Visit Facebook
+                    </a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h3>Instagram</h3>
+                    <p>Daily edits • Behind scenes • Reels • Stories</p>
+                    <a href="https://instagram.com" class="contact-link" target="_blank">
+                        <i class="fab fa-instagram"></i> Follow on IG
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="logo" style="font-size: 2.5rem; margin-bottom: 20px;">BLACK EDITOR</div>
+            <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 30px; opacity: 0.8;">
+                Professional Editing Services • 5+ Years Experience • News Channels & Film Industry & Commedy Channels • 500+ Projects Completed
+            </p>
+            
+            <div class="social-links">
+                <a href="https://wa.me/918653254692" class="social-icon" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="mailto:zub.editor@gmail.com" class="social-icon" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://t.me/Mr_BLACK_ix" class="social-icon" target="_blank" title="Telegram">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="https://facebook.com" class="social-icon" target="_blank" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://instagram.com" class="social-icon" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://youtube.com" class="social-icon" target="_blank" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            
+            <div class="copyright" style="margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                <p>&copy; 2024 <strong>Professional Editor</strong>. All Rights Reserved.</p>
+                <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.6;">
+                    Serving clients worldwide • 24/7 Support • Premium Quality Guaranteed
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Image Slider - 6 Images that change every 3 seconds
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        
+        function showNextSlide() {
+            // Hide current slide
+            slides[currentSlide].classList.remove('active');
+            
+            // Move to next slide
+            currentSlide = (currentSlide + 1) % slides.length;
+            
+            // Show next slide
+            slides[currentSlide].classList.add('active');
+            
+            // Add random animation effect
+            const effects = ['zoomIn', 'slideIn', 'fadeIn', 'rotateIn'];
+            const randomEffect = effects[Math.floor(Math.random() * effects.length)];
+            slides[currentSlide].style.animation = `${randomEffect} 1.5s ease`;
+            
+            setTimeout(() => {
+                slides[currentSlide].style.animation = '';
+            }, 1500);
+        }
+        
+        // Start slideshow
+        setInterval(showNextSlide, 3000); // Change every 3 seconds
+        
+        // 24-Hour Countdown Timer (Resets Daily)
+        function updateCountdown() {
+            const now = new Date();
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            
+            const diff = tomorrow - now;
+            
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            // Format with leading zeros
+            const formatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            document.getElementById('countdown').textContent = formatted;
+            
+            // Color change effect for last hour
+            if (hours === 0) {
+                document.getElementById('countdown').style.color = '#ff4e50';
+                document.getElementById('countdown').style.animation = 'pulse 0.5s infinite alternate';
+            } else {
+                document.getElementById('countdown').style.color = '';
+                document.getElementById('countdown').style.animation = '';
+            }
+        }
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animate elements on scroll with Intersection Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    
+                    // Add sequential animation for service cards
+                    if(entry.target.classList.contains('service-card')) {
+                        const index = Array.from(entry.target.parentNode.children).indexOf(entry.target);
+                        entry.target.style.transitionDelay = `${index * 0.1}s`;
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.service-card, .contact-card, .trust-badge, .testimonial-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Header effect on scroll
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const currentScroll = window.pageYOffset;
+            
+            if(currentScroll > 100) {
+                header.style.background = 'rgba(15, 15, 35, 0.98)';
+                header.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.6)';
+                
+                if(currentScroll > lastScroll && currentScroll > 400) {
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    header.style.transform = 'translateY(0)';
+                }
+            } else {
+                header.style.background = 'rgba(15, 15, 35, 0.92)';
+                header.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.5)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Auto-scroll testimonials
+        const testimonialSlider = document.querySelector('.testimonial-slider');
+        let scrollAmount = 0;
+        
+        function autoScrollTestimonials() {
+            if(testimonialSlider) {
+                scrollAmount += 1;
+                if(scrollAmount >= testimonialSlider.scrollWidth / 2) {
+                    scrollAmount = 0;
+                }
+                testimonialSlider.scrollLeft = scrollAmount;
+            }
+        }
+        
+        setInterval(autoScrollTestimonials, 50);
+
+        // Hover effect for all interactive elements
+        document.querySelectorAll('.service-card, .contact-card, .trust-badge, .cta-button, .contact-link').forEach(el => {
+            el.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+            
+            el.addEventListener('mouseleave', function() {
+                this.style.zIndex = '';
+            });
+        });
+
+        // Click effects for buttons
+        document.querySelectorAll('.cta-button, .contact-link').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.7);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    top: ${y}px;
+                    left: ${x}px;
+                `;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add CSS for ripple effect
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Notification for free offer
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const notification = document.createElement('div');
+                notification.innerHTML = `
+                    <div style="position: fixed; bottom: 20px; right: 20px; background: var(--gradient); color: white; padding: 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 1000; max-width: 300px; animation: slideInRight 0.5s ease;">
+                        <strong>🎁 Free Offer Active!</strong>
+                        <p style="margin: 10px 0; font-size: 0.9rem;">Claim your free editing project now!</p>
+                        <button onclick="this.parentElement.remove()" style="background: white; color: var(--primary); border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold;">Got it!</button>
+                    </div>
+                `;
+                document.body.appendChild(notification);
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
